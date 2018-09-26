@@ -1,0 +1,37 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - microblog</title>
+        {% else %}
+        <title>microblog</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            Microblog:
+            <a href="/index">Home</a>
+            <a href="/login">Login</a>
+            <a href="/logout">logout</a>
+            <a href="/register">Click to Register!</a>
+            {% if current_user.is_authenticated %}
+                <a>当前用户：{{ current_user.username }}</a>
+            {% else %}
+                <a>未登录</a>
+            {% endif %}
+        </div>
+
+        <hr>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </body>
+</html>
